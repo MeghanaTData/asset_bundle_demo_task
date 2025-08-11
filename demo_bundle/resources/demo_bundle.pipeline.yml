@@ -1,0 +1,10 @@
+resources:
+  pipelines:
+    demo_bundle_pipeline:
+      name: demo_bundle_pipeline
+      schema: pipeline_bundle_${bundle.target}
+      libraries:
+        - notebook:
+            path: ../src/notebook.ipynb
+      configuration:
+        bundle.sourcePath: ${workspace.file_path}/src
