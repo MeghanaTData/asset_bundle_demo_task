@@ -1,6 +1,6 @@
 name: deploy_to_dev
 
-concurrency: 1
+concurrency: deploy_to_dev # ensures only one deploy runs at a time
 
 on:
   workflow_dispatch: # Manual trigger
@@ -12,26 +12,24 @@ env:
 jobs:
   deploy:
     environment: dev
-    name: "Deploy bundle to Dev"
+    name: "Deploy Bundle to Dev"
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Databricks CLI
-        uses: databricks/setup-cli@main
+        uses: databricks/setup-cli@v1
 
       - name: Validate Databricks Bundle
         working-directory: demo_bundle
-        run: |
-          databricks bundle validate -t "dev" --var="env=dev"
+        run: databricks bundle validate -t dev --var env=dev
         env:
           DATABRICKS_BUNDLE_ENV: dev
 
       - name: Deploy Databricks Bundle
         working-directory: demo_bundle
-        run: |
-          databricks bundle deploy -t "dev" --var="env=dev"
+        run: databricks bundle deploy -t dev --var env=dev
         env:
           DATABRICKS_BUNDLE_ENV: dev
