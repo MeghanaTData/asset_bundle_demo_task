@@ -2,7 +2,7 @@ resources:
   pipelines:
     demo_bundle_pipeline:
       name: demo_bundle_pipeline
-      schema: pipeline_bundle_${bundle.target}
+      schema: pipeline_bundle_${bundle.default}
       libraries:
         - notebook:
             path: /Workspace/Users/meghana.tripathi@simbustech.com/asset_bundle_demo_task/demo_bundle/src/notebook
