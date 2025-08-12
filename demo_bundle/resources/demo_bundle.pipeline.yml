@@ -1,10 +1,41 @@
+variables:
+  my_pipeline_name:
+    description: "Name of the Delta Live Table pipeline"
+    type: string
+    default: "demo_bundle_pipeline"
+
+  my_pipeline_cluster:
+    description: "Cluster configuration for the pipeline"
+    type: complex
+    default:
+      autoscale:
+        min_workers: 1
+        max_workers: 3
+      spark_version: "13.2.x-scala2.11"
+      node_type_id: "Standard_DS3_v2"
+      spark_conf:
+        spark.databricks.delta.preview.enabled: "true"
+        spark.speculation: "false"
+
+  my_pipeline_storage:
+    description: "Storage location for pipeline output"
+    type: string
+    default: "/mnt/demo_bundle_pipeline"
+
 resources:
   pipelines:
     demo_bundle_pipeline:
-      name: demo_bundle_pipeline
-      schema: pipeline_bundle_${bundle.default}
+      name: ${var.my_pipeline_name}
+      clusters:
+        - label: default
+          autoscale: ${var.my_pipeline_cluster.autoscale}
+          spark_version: ${var.my_pipeline_cluster.spark_version}
+          node_type_id: ${var.my_pipeline_cluster.node_type_id}
+          spark_conf: ${var.my_pipeline_cluster.spark_conf}
+
+      storage: ${var.my_pipeline_storage}
+      configuration:
+        bundle.target: ${bundle.target}
       libraries:
         - notebook:
-            path: /Workspace/Users/meghana.tripathi@simbustech.com/asset_bundle_demo_task/demo_bundle/src/notebook
-      configuration:
-        bundle.sourcePath: ${workspace.file_path}/src
+            path: ${var.my_notebook_path}
