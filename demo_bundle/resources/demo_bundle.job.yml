@@ -32,7 +32,7 @@ resources:
           notebook_task:
             notebook_path: ${var.my_notebook_path}
             base_parameters:
-              environment: ${bundle.target}
+              environment: ${bundle.default}
               message: "Hello from new cluster"
 
         - task_key: run_notebook_with_lookup_cluster
@@ -40,5 +40,5 @@ resources:
           notebook_task:
             notebook_path: ${var.my_notebook_path}
             base_parameters:
-              environment: ${bundle.target}
+              environment: ${bundle.default}
               message: "Hello from lookup cluster"
