@@ -1,9 +1,7 @@
-
-  
-  bundle:
+bundle:
   name: demo_bundle
 
-  include:
+include:
   - resources/*.yml
 
 workspace:
