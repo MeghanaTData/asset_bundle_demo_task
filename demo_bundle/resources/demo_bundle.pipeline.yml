@@ -5,6 +5,6 @@ resources:
       schema: pipeline_bundle_${bundle.target}
       libraries:
         - notebook:
-            path: ../src/notebook.ipynb
+            path: /Workspace/Users/meghana.tripathi@simbustech.com/asset_bundle_demo_task/demo_bundle/src/notebook
       configuration:
         bundle.sourcePath: ${workspace.file_path}/src
