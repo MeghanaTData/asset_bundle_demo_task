@@ -23,12 +23,14 @@ jobs:
         uses: databricks/setup-cli@main
 
       - name: Validate Databricks Bundle
+        working-directory: demo_bundle
         run: |
           databricks bundle validate -t "dev" --var="env=dev"
         env:
           DATABRICKS_BUNDLE_ENV: dev
 
       - name: Deploy Databricks Bundle
+        working-directory: demo_bundle
         run: |
           databricks bundle deploy -t "dev" --var="env=dev"
         env:
