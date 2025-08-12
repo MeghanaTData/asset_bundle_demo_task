@@ -1,26 +1,28 @@
 bundle:
   name: demo_bundle
 
-  workspace:
-    root_path: /Workspace/Users/${workspace.current_user.userName}/.bundle/${bundle.name}/${bundle.default}
+workspace:
+  root_path: /Workspace/Users/${workspace.current_user.userName}/.bundle/${bundle.name}/${bundle.target}
 
-  targets:
-    dev:
-      default: true
-      variables:
-        my_cluster_id: "1234-567890-abcde123"
-        my_notebook_path: "/Workspace/Users/meghana.tripathi@simbustech.com/asset_bundle_demo_task/demo_bundle/src/notebook"
+targets:
+  default:
+    default: true
+    variables:
+      my_cluster_id: "1234-567890-abcde123"
+      my_notebook_path: "/Workspace/Users/meghana.tripathi@simbustech.com/asset_bundle_demo_task/demo_bundle/src/notebook"
 
-    prod:
-      workspace:
-        root_path: /Workspace/Users/meghana.tripathi@simbustech.com/.bundle/${bundle.name}/${bundle.default}
-      variables:
-        my_cluster_id: "2345-678901-bcdef234"
-        my_notebook_path: "/Workspace/Users/meghana.tripathi@simbustech.com/asset_bundle_demo_task/demo_bundle/src/notebook"
+  prod:
+    workspace:
+      root_path: /Workspace/Users/meghana.tripathi@simbustech.com/.bundle/${bundle.name}/${bundle.target}
+    variables:
+      my_cluster_id: "2345-678901-bcdef234"
+      my_notebook_path: "/Workspace/Users/meghana.tripathi@simbustech.com/asset_bundle_demo_task/demo_bundle/src/notebook"
 
 resources:
   jobs:
-    - path: resources/demo_bundle.job.yml
+    demo_bundle_job:
+      path: resources/demo_bundle.job.yml
 
   pipelines:
-    - path: resources/demo_bundle.pipeline.yml
+    demo_bundle_pipeline:
+      path: resources/demo_bundle.pipeline.yml
