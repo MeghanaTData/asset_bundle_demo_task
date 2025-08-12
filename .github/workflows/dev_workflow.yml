@@ -30,6 +30,6 @@ jobs:
 
       - name: Deploy Databricks Bundle
         working-directory: demo_bundle
-        run: databricks bundle deploy 
+        run: databricks bundle deploy --auto-approve
         env:
           DATABRICKS_BUNDLE_ENV: dev
