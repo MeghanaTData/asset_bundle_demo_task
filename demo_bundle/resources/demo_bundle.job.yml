@@ -10,14 +10,11 @@ variables:
         spark.speculation: "true"
         spark.databricks.delta.retentionDurationCheck.enabled: "false"
 
-
-variables:
   my_lookup_cluster_id:
     description: "ID of existing cluster found by name"
     lookup:
       cluster: "Simbus_DBRX_Cluster"
-
-variables:
+      
   my_notebook_path:
     description: "Path to the notebook to run"
     type: string
