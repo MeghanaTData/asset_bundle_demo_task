@@ -13,7 +13,7 @@ variables:
   my_lookup_cluster_id:
     description: "ID of existing cluster found by name"
     lookup:
-      cluster: "12.2 shared"
+      cluster: "Simbus_DBRX_Cluster"
 
   my_notebook_path:
     description: "Path to the notebook to run"
