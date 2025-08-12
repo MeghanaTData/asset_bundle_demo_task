@@ -25,8 +25,11 @@ resources:
     demo_bundle_job:
 
       job_clusters:
-        - job_cluster_key: my_cluster_key
+          job_cluster_key: my_cluster_key
           new_cluster: ${var.my_cluster}
+          job_cluster_key: lookup_cluster_key
+          existing_cluster_id: ${var.my_lookup_cluster_id} 
+        
      
       tasks:
         - task_key: run_notebook_with_new_cluster
