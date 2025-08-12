@@ -1,5 +1,10 @@
-bundle:
+
+  
+  bundle:
   name: demo_bundle
+
+  include:
+  - resources/*.yml
 
 workspace:
   root_path: /Workspace/Users/${workspace.current_user.userName}/.bundle/${bundle.name}/${bundle.target}
@@ -18,11 +23,4 @@ targets:
       my_cluster_id: "2345-678901-bcdef234"
       my_notebook_path: "/Workspace/Users/meghana.tripathi@simbustech.com/asset_bundle_demo_task/demo_bundle/src/notebook"
 
-resources:
-  jobs:
-    demo_bundle_job:
-      path: resources/demo_bundle.job.yml
 
-  pipelines:
-    demo_bundle_pipeline:
-      path: resources/demo_bundle.pipeline.yml
