@@ -24,12 +24,12 @@ jobs:
 
       - name: Validate Databricks Bundle
         working-directory: demo_bundle
-        run: databricks bundle validate -t dev --var env=dev
+        run: databricks bundle validate 
         env:
           DATABRICKS_BUNDLE_ENV: dev
 
       - name: Deploy Databricks Bundle
         working-directory: demo_bundle
-        run: databricks bundle deploy -t dev --var env=dev
+        run: databricks bundle deploy 
         env:
           DATABRICKS_BUNDLE_ENV: dev
