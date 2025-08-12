@@ -27,9 +27,7 @@ resources:
 
       job_clusters:
         - job_cluster_key: my_cluster_key
-          new_cluster: ${var.my_cluster}
           new_cluster: $(var.my_lookup_cluster_id)
-
      
       tasks:
         - task_key: run_notebook_with_new_cluster
