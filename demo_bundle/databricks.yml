@@ -5,7 +5,7 @@ workspace:
   root_path: /Workspace/Users/${workspace.current_user.userName}/.bundle/${bundle.name}/${bundle.target}
 
 targets:
-  default:
+  dev:
     default: true
     variables:
       my_cluster_id: "1234-567890-abcde123"
