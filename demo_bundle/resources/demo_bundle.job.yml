@@ -23,11 +23,10 @@ variables:
 resources:
   jobs:
     demo_bundle_job:
-      name: demo_bundle_job
 
       job_clusters:
         - job_cluster_key: my_cluster_key
-          new_cluster: ${var.my_lookup_cluster_id}
+          new_cluster: ${var.my_cluster}
      
       tasks:
         - task_key: run_notebook_with_new_cluster
