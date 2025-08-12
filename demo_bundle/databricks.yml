@@ -10,15 +10,8 @@ workspace:
 targets:
   dev:
     default: true
-    variables:
-      my_cluster_id: "1234-567890-abcde123"
-      my_notebook_path: "/Workspace/Users/meghana.tripathi@simbustech.com/asset_bundle_demo_task/demo_bundle/src/notebook"
-
+    
   prod:
     workspace:
       root_path: /Workspace/Users/meghana.tripathi@simbustech.com/.bundle/${bundle.name}/${bundle.target}
-    variables:
-      my_cluster_id: "2345-678901-bcdef234"
-      my_notebook_path: "/Workspace/Users/meghana.tripathi@simbustech.com/asset_bundle_demo_task/demo_bundle/src/notebook"
-
-
+  
