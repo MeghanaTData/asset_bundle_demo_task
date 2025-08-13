@@ -13,5 +13,4 @@ targets:
     
   prod:
     workspace:
-      root_path: /Workspace/Users/meghana.tripathi@simbustech.com/.bundle/${bundle.name}/${bundle.target}
-  
+      root_path: /Workspace/Users/${workspace.current_user.userName}/.bundle/${bundle.name}/${bundle.target}
