@@ -18,7 +18,7 @@ variables:
   my_notebook_path:
     description: "Path to the notebook to run"
     type: string
-    default: "/Workspace/Users/meghana.tripathi@simbustech.com/asset_bundle_demo_task/demo_bundle/src/notebook"
+    default: "/Workspace/Users/${workspace.current_user.userName}/asset_bundle_demo_task/demo_bundle/src/notebook"
 
 resources:
   jobs:
@@ -28,10 +28,6 @@ resources:
       job_clusters:
         - job_cluster_key: my_cluster_key
           new_cluster: ${var.my_cluster}
-
-      job_clusters:
-        - job_cluster_key: lookup_cluster_key
-          existing_cluster_id: ${var.my_lookup_cluster_id}
 
       tasks:
         - task_key: run_notebook_with_new_cluster
@@ -43,7 +39,7 @@ resources:
               message: "Hello from new cluster"
 
         - task_key: run_notebook_with_lookup_cluster
-          job_cluster_key: lookup_cluster_key
+          existing_cluster_id: ${var.my_lookup_cluster_id}
           notebook_task:
             notebook_path: ${var.my_notebook_path}
             base_parameters:

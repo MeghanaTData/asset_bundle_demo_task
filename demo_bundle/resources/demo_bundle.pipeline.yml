@@ -4,38 +4,63 @@ variables:
     type: string
     default: "demo_bundle_pipeline"
 
+  # Unity Catalog Configuration Variables
+  uc_catalog:
+    description: "Unity Catalog catalog name"
+    type: string
+    default: "az_adb_simbus_training" 
+
+  uc_schema:
+    description: "Unity Catalog schema name"
+    type: string
+    default: "dab_riz"  
+
   my_pipeline_cluster:
-    description: "Cluster configuration for the pipeline"
+    description: "UC-compatible cluster configuration for the pipeline"
     type: complex
     default:
       autoscale:
         min_workers: 1
         max_workers: 3
-      spark_version: "13.2.x-scala2.11"
       node_type_id: "Standard_DS3_v2"
       spark_conf:
-        spark.databricks.delta.preview.enabled: "true"
         spark.speculation: "false"
+        spark.databricks.delta.retentionDurationCheck.enabled: "false"
+        # UC-specific configurations
+        spark.databricks.unityCatalog.enabled: "true"
+        spark.sql.catalog.spark_catalog: "unity"
 
-  my_pipeline_storage:
-    description: "Storage location for pipeline output"
+  my_pipeline_notebook_path:
+    description: "Path to the DLT notebook"
     type: string
-    default: "/mnt/demo_bundle_pipeline"
+    default: "/Workspace/Users/${workspace.current_user.userName}/asset_bundle_demo_task/demo_bundle/src/dlt_notebook"
 
 resources:
   pipelines:
     demo_bundle_pipeline:
-      name: ${var.my_pipeline_name}
+      name: ${var.my_pipeline_name}_${bundle.target}
+      
+      # Unity Catalog Configuration
+      catalog: ${var.uc_catalog}
+      schema: ${var.uc_schema}  # When catalog is specified, target is just the schema name
+      
+      # Cluster configuration with UC support
       clusters:
         - label: default
           autoscale: ${var.my_pipeline_cluster.autoscale}
-          spark_version: ${var.my_pipeline_cluster.spark_version}
           node_type_id: ${var.my_pipeline_cluster.node_type_id}
           spark_conf: ${var.my_pipeline_cluster.spark_conf}
 
-      storage: ${var.my_pipeline_storage}
+      # Pipeline configuration
       configuration:
         bundle.target: ${bundle.target}
+        pipeline.environment: ${bundle.target}
+        unity_catalog.enabled: "true"
+        
+      development: true
+      photon: true
+      edition: "ADVANCED"  
+      # Notebook libraries
       libraries:
         - notebook:
-            path: ${var.my_notebook_path}
+            path: ${var.my_pipeline_notebook_path}
