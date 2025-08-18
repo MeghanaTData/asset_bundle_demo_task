@@ -1,8 +1,8 @@
 variables:
   my_pipeline_name:
-    description: "Name of the Delta Live Table pipeline"
-    type: string
-    default: "demo_bundle_pipeline"
+    description: "demo_variables_job"
+    type: complex
+    default: "demo_variables_job"
 
   # Unity Catalog Configuration Variables
   uc_catalog:
