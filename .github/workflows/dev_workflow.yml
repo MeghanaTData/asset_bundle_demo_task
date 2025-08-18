@@ -3,7 +3,10 @@ name: deploy_to_dev
 concurrency: deploy_to_dev # ensures only one deploy runs at a time
 
 on:
-  workflow_dispatch: # Manual trigger
+  push:
+    branches:
+      - main   # Run when changes are pushed to main branch
+  workflow_dispatch: # Manual trigger still available
 
 env:
   DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
