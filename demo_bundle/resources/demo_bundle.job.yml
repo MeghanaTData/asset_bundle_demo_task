@@ -1,47 +1,43 @@
 variables:
-  my_cluster:
-    description: "Cluster configuration for the new cluster"
-    type: complex
-    default:
-      spark_version: "13.2.x-scala2.11"
-      node_type_id: "Standard_DS3_v2"
-      num_workers: 2
-      spark_conf:
-        spark.speculation: "true"
-        spark.databricks.delta.retentionDurationCheck.enabled: "false"
-
   my_lookup_cluster_id:
     description: "ID of existing cluster found by name"
     lookup:
       cluster: "Simbus_DBRX_Cluster"
 
   my_notebook_path:
-    description: "Path to the notebook to run"
+    description: "Path to base folder of notebooks"
     type: string
-    default: "/Workspace/Users/${workspace.current_user.userName}/asset_bundle_demo_task/demo_bundle/src/notebook"
+    default: "/Workspace/Users/${workspace.current_user.userName}/demo_bundle/src"
+
+  input_table:
+    description: "Demo input table name"
+    type: string
+    default: "demo_input_table"
+
+  output_table:
+    description: "Demo output table name"
+    type: string
+    default: "demo_output_table"
+
 
 resources:
   jobs:
-    demo_bundle_job:
-      name: demo_bundle_job
-
-      job_clusters:
-        - job_cluster_key: my_cluster_key
-          new_cluster: ${var.my_cluster}
-
+    demo_variables_job:
+      name: "Demo Variables Job"
       tasks:
-        - task_key: run_notebook_with_new_cluster
-          job_cluster_key: my_cluster_key
-          notebook_task:
-            notebook_path: ${var.my_notebook_path}
-            base_parameters:
-              environment: ${bundle.target}
-              message: "Hello from new cluster"
-
-        - task_key: run_notebook_with_lookup_cluster
+        - task_key: ingest
           existing_cluster_id: ${var.my_lookup_cluster_id}
           notebook_task:
-            notebook_path: ${var.my_notebook_path}
+            notebook_path: ${var.my_notebook_path}/Notebook_1
             base_parameters:
-              environment: ${bundle.target}
-              message: "Hello from lookup cluster"
+              input_table: ${var.input_table}
+
+        - task_key: transform
+          existing_cluster_id: ${var.my_lookup_cluster_id}
+          depends_on:
+            - ingest
+          notebook_task:
+            notebook_path: ${var.my_notebook_path}/Notebook_2
+            base_parameters:
+              input_table: ${var.input_table}
+              output_table: ${var.output_table}
