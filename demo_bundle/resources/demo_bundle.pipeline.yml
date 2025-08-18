@@ -7,12 +7,12 @@ variables:
   # Unity Catalog Configuration Variables
   uc_catalog:
     description: "Unity Catalog catalog name"
-    type: string
+    type: complex
     default: "az_adb_simbus_training" 
 
   uc_schema:
     description: "Unity Catalog schema name"
-    type: string
+    type: complex
     default: "dab_riz"  
 
   my_pipeline_cluster:
@@ -32,7 +32,7 @@ variables:
 
   my_pipeline_notebook_path:
     description: "Path to the DLT notebook"
-    type: string
+    type: complex
     default: "/Workspace/Users/${workspace.current_user.userName}/asset_bundle_demo_task/demo_bundle/src/dlt_notebook"
 
 resources:
