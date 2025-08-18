@@ -31,11 +31,19 @@ jobs:
         env:
           DATABRICKS_BUNDLE_ENV: dev
 
+          DATABRICKS_HOST: ${{ vars.DATABRICKS_URL }}
+
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+
       - name: Deploy Databricks Bundle
         working-directory: demo_bundle
         run: databricks bundle deploy --auto-approve
         env:
           DATABRICKS_BUNDLE_ENV: dev
+
+          DATABRICKS_HOST: ${{ vars.DATABRICKS_URL }}
+
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
 
       - name: Run Demo Job
         working-directory: demo_bundle
