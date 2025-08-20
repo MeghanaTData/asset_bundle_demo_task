@@ -35,7 +35,7 @@ resources:
         - task_key: transform
           existing_cluster_id: ${var.my_lookup_cluster_id}
           depends_on:
-             job: - ingest
+             task_key: ingest
           notebook_task:
             notebook_path: ${var.my_notebook_path}/Notebook_2
             base_parameters:
