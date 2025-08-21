@@ -7,8 +7,8 @@ variables:
   my_notebook_path:
     description: "Path to base folder of notebooks"
     type: string
-    default: "/Workspace/Users/${workspace.current_user.userName}/demo_bundle/src"
-
+    default: "/Repos/Workspace/Users/${workspace.current_user.userName}/demo_bundle/src"
+    
   input_table:
     description: "Demo input table name"
     type: string
