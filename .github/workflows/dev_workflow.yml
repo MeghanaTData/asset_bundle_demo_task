@@ -31,7 +31,7 @@ jobs:
         env:
           DATABRICKS_BUNDLE_ENV: dev
 
-          DATABRICKS_HOST: ${{ vars.DATABRICKS_URL }}
+          DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
 
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
 
@@ -41,7 +41,7 @@ jobs:
         env:
           DATABRICKS_BUNDLE_ENV: dev
 
-          DATABRICKS_HOST: ${{ vars.DATABRICKS_URL }}
+          DATABRICKS_HOST: ${{ vars.DATABRICKS_HOST }}
 
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
 
