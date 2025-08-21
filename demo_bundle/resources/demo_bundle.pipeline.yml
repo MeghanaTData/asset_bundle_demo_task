@@ -33,7 +33,7 @@ variables:
   my_pipeline_notebook_path:
     description: "Path to the DLT notebook"
     type: complex
-    default: "/Workspace/Users/${workspace.current_user.userName}/asset_bundle_demo_task/demo_bundle/src/dlt_notebook"
+    default: "/Repos/Workspace/Users/${workspace.current_user.userName}/asset_bundle_demo_task/demo_bundle/src/dlt_notebook"
 
 resources:
   pipelines:
